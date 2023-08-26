@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
-if (-not (Test-Command maven)) {
+if (-not (Test-Command maven) -and (-not $Global:PWSHRC_FORCE_MODULES_EXPORT_UNSUPPORTED)) {
     return
 }
 
