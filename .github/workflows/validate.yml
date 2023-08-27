@@ -221,12 +221,12 @@ jobs:
         path: ./out/
     - name: Test with Pester
       shell: pwsh
-      run: ./build/test.ps1 -UsePackageExport -CI -OutputFilesPrefix "${{ runner.os }}-" -NoFail:([bool]"${{ matrix.experimental }}")
-    - name: "Create artifact: tests-${{ runner.os }}"
+      run: ./build/test.ps1 -UsePackageExport -CI -OutputFilesPrefix "${{ matrix.os }}-" -NoFail:([bool]"${{ matrix.experimental }}")
+    - name: "Create artifact: tests-${{ matrix.os }}"
       uses: actions/upload-artifact@v3
       if: ${{ always() }}
       with:
-        name: "tests-${{ runner.os }}"
+        name: "tests-${{ matrix.os }}"
         path: ./out/*.xml
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v3
