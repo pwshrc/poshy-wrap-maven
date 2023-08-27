@@ -235,6 +235,6 @@ jobs:
         fail_ci_if_error: true
         flags: ${{ matrix.codecov_os }},unittests
         directory: ./out
-        files: *coverage.xml
+        files: "*coverage.xml"
         os: ${{ matrix.codecov_os }}
         env_vars: "OS"
