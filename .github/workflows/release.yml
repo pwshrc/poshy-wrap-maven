@@ -89,7 +89,7 @@ jobs:
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         ./build/restore.ps1
-    - name: Download PSGallery package
+    - name: "Get artifact: PSGallery-package"
       uses: actions/download-artifact@v2
       with:
         name: PSGallery-package
@@ -127,7 +127,7 @@ jobs:
       run: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         ./build/restore.ps1
-    - name: Download version.json
+    - name: "Get artifact: version.json"
       uses: actions/download-artifact@v2
       with:
         name: version.json
@@ -140,7 +140,7 @@ jobs:
         foreach ($key in $version.PSObject.Properties.Name) {
           echo "::set-output name=$key::$($version.$key)"
         }
-    - name: Download PSGallery package
+    - name: "Get artifact: PSGallery-package"
       uses: actions/download-artifact@v2
       with:
         name: PSGallery-package
@@ -165,7 +165,7 @@ jobs:
     steps:
     - name: Check out repository code
       uses: actions/checkout@v3
-    - name: Download version.json
+    - name: "Get artifact: version.json"
       uses: actions/download-artifact@v2
       with:
         name: version.json
@@ -178,12 +178,12 @@ jobs:
         foreach ($key in $version.PSObject.Properties.Name) {
           echo "::set-output name=$key::$($version.$key)"
         }
-    - name: Download release-notes.md
+    - name: "Get artifact: release-notes.md"
       uses: actions/download-artifact@v2
       with:
         name: release-notes.md
         path: ./out/
-    - name: Download PSGallery package
+    - name: "Get artifact: PSGallery-package"
       uses: actions/download-artifact@v2
       with:
         name: PSGallery-package
