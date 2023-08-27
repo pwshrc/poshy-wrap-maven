@@ -174,7 +174,7 @@ jobs:
     name: Test with Pester on ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental == 'true' }}
     strategy:
-      fail-fast: ${{ runner.ref == 'refs/heads/main' }}
+      fail-fast: ${{ github.ref == 'refs/heads/main' }}
       matrix:
         # See: https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
         os: [ubuntu-latest, windows-latest, macos-latest, ubuntu-20.04, windows-2019]
@@ -230,7 +230,7 @@ jobs:
         path: ./out/*.xml
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v3
-      if: ${{ (runner.ref == 'refs/heads/main') }}
+      if: ${{ (github.ref == 'refs/heads/main') }}
       with:
         fail_ci_if_error: true
         flags: ${{ matrix.codecov_os }},unittests
