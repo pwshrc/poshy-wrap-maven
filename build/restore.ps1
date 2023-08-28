@@ -9,7 +9,12 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
-if (-not (Get-Command nuget.exe -ErrorAction SilentlyContinue)) {
+[string] $nuget_bin = $null
+if (Get-Command nuget -ErrorAction SilentlyContinue) {
+    $nuget_bin = "nuget"
+} elseif (Get-Command nuget.exe -ErrorAction SilentlyContinue) {
+    $nuget_bin = "nuget.exe"
+} else {
     throw "``nuget.exe` not found. Please install the NuGet CLI. See: https://learn.microsoft.com/en-us/nuget/install-nuget-client-tools#nugetexe-cli."
 }
 
@@ -17,4 +22,4 @@ if (-not (Get-Command nuget.exe -ErrorAction SilentlyContinue)) {
 [string] $psgalleryNugetConfig = "${PSScriptRoot}${ds}..${ds}NuGet.PSGallery.config"
 [string] $psgalleryPackagesConfig = "${PSScriptRoot}${ds}..${ds}packages.PSGallery.config"
 
-nuget.exe restore $psgalleryPackagesConfig -ConfigFile $psgalleryNugetConfig
+&$nuget_bin restore $psgalleryPackagesConfig -ConfigFile $psgalleryNugetConfig
